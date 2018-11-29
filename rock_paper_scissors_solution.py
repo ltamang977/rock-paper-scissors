@@ -27,8 +27,7 @@ class RandomPlayer(Player):
         self.name = 'Random player'
 
     def move(self):
-        move_list = ['rock', 'paper', 'scissors']
-        return random.choice(move_list)
+        return random.choice(moves)
 
     def learn(self, my_move, their_move):
         pass
@@ -40,9 +39,8 @@ class HumanPlayer(Player):
         self.name = 'Human player'
 
     def move(self):
-        move_list = ['rock', 'paper', 'scissors']
         choice = input("What move do you want to make? ")
-        while choice != 'quit' and choice not in move_list:
+        while choice != 'quit' and choice not in moves:
             choice = input("What move do you want to make? ")
         return choice
 
@@ -58,8 +56,7 @@ class ReflectPlayer(Player):
 
     def move(self):
         if self.last == '':
-            move_list = ['rock', 'paper', 'scissors']
-            return random.choice(move_list)
+            return random.choice(moves)
         else:
             return self.last
 
@@ -75,13 +72,11 @@ class CyclePlayer(Player):
 
     def move(self):
         if self.last == '':
-            move_list = ['rock', 'paper', 'scissors']
-            return random.choice(move_list)
+            return random.choice(moves)
         else:
-            move_list = ['rock', 'paper', 'scissors']
-            lastIndex = move_list.index(self.last)
-            currIndex = (lastIndex+1) % len(move_list)
-            return move_list[currIndex]
+            lastIndex = moves.index(self.last)
+            currIndex = (lastIndex+1) % len(moves)
+            return moves[currIndex]
 
     def learn(self, my_move, their_move):
         self.last = my_move
